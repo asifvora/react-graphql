@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, Suspense } from 'react'
+import { Router, Route, Switch } from 'react-router-dom'
+import { history, routes } from 'config/routes'
+import { Laoder } from 'components/Loader'
 
-const App = () => {
+export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Fragment>
+      <Suspense fallback={<Laoder />}>
+        <Router history={history}>
+          <Switch>
+            {Object.keys(routes).map(key => {
+              const { component: Component, exact, path, id } = routes[key]
+              return (
+                <Route
+                  key={id}
+                  path={path}
+                  exact={exact}
+                  component={Component}
+                />
+              )
+            })}
+          </Switch>
+        </Router>
+      </Suspense>
+    </Fragment>
+  )
 }
-
-export default App;
