@@ -13,6 +13,7 @@
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
     "apollo-boost": "^0.4.7",
+    "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link-error": "^1.1.12",
     "craco-workbox": "^0.1.0",

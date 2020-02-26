@@ -2,8 +2,10 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
-import { InMemoryCache } from 'apollo-boost'
+// import { InMemoryCache } from 'apollo-boost'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import { API_URL } from 'config/env'
+import { typeDefs, resolvers } from 'config/resolvers'
 
 const httpLink = new HttpLink({
   uri: API_URL,
@@ -30,7 +32,21 @@ const errorLink = onError(
 
 const link = ApolloLink.from([errorLink, httpLink])
 
+export const cache = new InMemoryCache()
+
 export const client = new ApolloClient({
+  cache,
   link,
-  cache: new InMemoryCache(),
+  resolvers,
+  typeDefs,
 })
+
+const data = {
+  isLoggedIn: !!localStorage.getItem('token'),
+}
+
+cache.writeData({ data })
+
+client.onResetStore((): any => cache.writeData({ data }))
+
+console.log({ cache })

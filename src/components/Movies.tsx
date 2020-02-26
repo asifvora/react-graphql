@@ -16,7 +16,11 @@ export const Movies: React.FC<IProps> = ({ movies }) => {
     <main>
       <ol className="gradient-list">
         {movies.map((film, index) => (
-          <li key={index} onClick={() => gotoDetails(film?.id)}>
+          <li
+            key={index}
+            onClick={() => gotoDetails(film?.id)}
+            className="movie"
+          >
             {film?.title ?? '-'}: {dateFormat(film?.releaseDate) ?? '-'}
           </li>
         ))}
