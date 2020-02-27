@@ -6,28 +6,20 @@ import { Movies } from 'components/Movies'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-const IS_LOGGED_IN = gql`
-  query IsUserLoggedIn {
-    isLoggedIn @client
-  }
-`
-
-const GET_MVS = gql`
+const FILMS = gql`
   query allFilms {
     allFilms(orderBy: releaseDate_DESC) {
       id
       title
       releaseDate
-      # isChecked @client
+      isChecked @client
     }
   }
 `
 export const MoviesListContainer: React.FC = () => {
   // const { loading, error, data } = useFetchFilmsQuery()
-  const { loading, error, data } = useQuery(GET_MVS)
-  const { data: login } = useQuery(IS_LOGGED_IN)
-  console.log(login)
-  console.log(data?.allFilms?.[0])
+  const { loading, error, data } = useQuery(FILMS)
+  console.log(data?.allFilms)
 
   return (
     <Fragment>

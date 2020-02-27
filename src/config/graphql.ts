@@ -2,8 +2,8 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
-// import { InMemoryCache } from 'apollo-boost'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache } from 'apollo-boost'
+// import { InMemoryCache } from 'apollo-cache-inmemory'
 import { API_URL } from 'config/env'
 import { typeDefs, resolvers } from 'config/resolvers'
 
@@ -17,8 +17,6 @@ const httpLink = new HttpLink({
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, response, operation }) => {
-    console.log({ graphQLErrors })
-
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
         console.log(
@@ -30,7 +28,7 @@ const errorLink = onError(
   }
 )
 
-const link = ApolloLink.from([errorLink, httpLink])
+const link = ApolloLink.from([httpLink, errorLink])
 
 export const cache = new InMemoryCache()
 
@@ -48,5 +46,3 @@ const data = {
 cache.writeData({ data })
 
 client.onResetStore((): any => cache.writeData({ data }))
-
-console.log({ cache })

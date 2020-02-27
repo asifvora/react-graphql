@@ -17,12 +17,12 @@ const defaultInitialValues: IProps = {
 }
 
 export const AddNewMovie: React.FC<any> = () => {
-  const [createFilmMutation, { data, loading, error }] = useCreateFilmMutation()
+  const [createFilmMutation, { loading, error }] = useCreateFilmMutation()
 
   const onSubmit = values => {
     createFilmMutation({ variables: values })
   }
-  console.log({ data })
+  console.log({ error })
 
   return (
     <main>

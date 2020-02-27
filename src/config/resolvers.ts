@@ -4,20 +4,15 @@ export const typeDefs = gql`
   extend type Query {
     isLoggedIn: Boolean!
   }
+  extend type Film {
+    isChecked: Boolean
+  }
 `
 
 export const resolvers = {
-  allFilms: {
+  Film: {
     isChecked: (_, args, { cache }) => {
       return !!localStorage.getItem('token')
-    },
-  },
-  Query: {
-    messageCount: (_, args, { cache }) => {
-      return {
-        total: 123,
-        __typename: 'MessageCount',
-      }
     },
   },
 }
