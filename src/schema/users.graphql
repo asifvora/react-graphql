@@ -6,3 +6,12 @@ query fetchShips {
     name
   }
 }
+
+query fetchShip($id: ID) {
+  ships(find: { id: $id }) {
+    id
+    image
+    model
+    name
+  }
+}

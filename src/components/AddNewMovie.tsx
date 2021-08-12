@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { useCreateFilmMutation } from 'generated/graphql'
+// import { useCreateFilmMutation } from 'generated/graphql'
 import { validations } from 'utils/validations'
 import { Input } from 'components/Input'
 import { Button } from 'components/Button'
@@ -17,12 +17,11 @@ const defaultInitialValues: IProps = {
 }
 
 export const AddNewMovie: React.FC<any> = () => {
-  const [createFilmMutation, { loading, error }] = useCreateFilmMutation()
+  // const [createFilmMutation, { loading, error }] = useCreateFilmMutation()
 
   const onSubmit = values => {
-    createFilmMutation({ variables: values })
+    // createFilmMutation({ variables: values })
   }
-  console.log({ error })
 
   return (
     <main>
@@ -52,9 +51,9 @@ export const AddNewMovie: React.FC<any> = () => {
                   <legend>
                     <span className="number">1</span> Movie Info
                   </legend>
-                  {error && (
+                  {/* {error && (
                     <p className="error"> {JSON.stringify(error.message)} </p>
-                  )}
+                  )} */}
                   <Input
                     type="text"
                     name="title"
@@ -75,8 +74,8 @@ export const AddNewMovie: React.FC<any> = () => {
                     isError={touched.episodeId && errors.episodeId}
                     errorMesage={errors.episodeId}
                   />
-                  <Button type="submit" disabled={loading}>
-                    {loading ? 'Loading...' : 'Add New Movie'}
+                  <Button type="submit" disabled={false}>
+                    {false ? 'Loading...' : 'Add New Movie'}
                   </Button>
                 </fieldset>
               </form>

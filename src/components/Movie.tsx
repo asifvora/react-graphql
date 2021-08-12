@@ -1,19 +1,18 @@
 import React from 'react'
-import { dateFormat } from 'utils/date'
-import { IFilm } from 'types'
+import { IShip } from 'types'
 
 type IProps = {
-  movie: IFilm
+  ship: IShip
 }
 
-export const Movie: React.FC<IProps> = ({ movie }) => {
-  const { title, releaseDate } = movie
+export const Movie: React.FC<IProps> = ({ ship }) => {
+  const { name, id } = ship
 
   return (
     <main>
       <ol className="gradient-list">
         <li>
-          {title ?? '-'}: {dateFormat(releaseDate) ?? '-'}
+          {id ?? '-'}: {name ?? '-'}
         </li>
       </ol>
     </main>

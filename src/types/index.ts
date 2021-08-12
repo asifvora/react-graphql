@@ -1,8 +1,8 @@
-export type IFilm = {
+export type IShip = {
   id?: string
-  title?: string
-  releaseDate?: string
-  __typename?: string
+  name?: string
+  image?: string
+  model?: string
 }
 
-export type IFilms = IFilm[]
+export type IShips = IShip[]

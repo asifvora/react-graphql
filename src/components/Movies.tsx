@@ -1,13 +1,12 @@
 import React from 'react'
-import { dateFormat } from 'utils/date'
-import { IFilms } from 'types'
+import { IShips } from 'types'
 import { history, routes } from 'config/routes'
 
 type IProps = {
-  movies: IFilms
+  ships: IShips
 }
 
-export const Movies: React.FC<IProps> = ({ movies }) => {
+export const Movies: React.FC<IProps> = ({ ships }) => {
   const gotoDetails = (id: string) => {
     history.push(routes.movieDetails.path_string({ id }))
   }
@@ -15,13 +14,13 @@ export const Movies: React.FC<IProps> = ({ movies }) => {
   return (
     <main>
       <ol className="gradient-list">
-        {movies.map((film, index) => (
+        {ships?.map((ship, index) => (
           <li
             key={index}
-            onClick={() => gotoDetails(film?.id)}
+            onClick={() => gotoDetails(ship?.id)}
             className="movie"
           >
-            {film?.title ?? '-'}: {dateFormat(film?.releaseDate) ?? '-'}
+            {ship?.name ?? '-'}: {ship?.model ?? '-'}
           </li>
         ))}
       </ol>
